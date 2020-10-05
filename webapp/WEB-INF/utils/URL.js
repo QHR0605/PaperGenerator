@@ -1,4 +1,5 @@
 const URL = {
     doLogin: "http://",
-    doSavePwd: "http://"
-}
+    doSavePwd: "http://",
+    doSelectLevel: "http://"
+};

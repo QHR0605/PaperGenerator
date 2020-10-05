@@ -9,8 +9,7 @@ html {
 
 body {
     height: 100%;
-    font-family: 'JetBrains Mono Medium', Consolas, serif;
-    display: flex;
+    font-family: 'JetBrains Mono Medium', Consolas, 'Microsoft YaHei UI',serif;    display: flex;
     align-items: center;
     justify-content: center;
     background-color: #0e92b3;
