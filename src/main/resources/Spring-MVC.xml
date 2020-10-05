@@ -20,15 +20,21 @@
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
 		
-		
-    <!-- 视图解析器:因为jsp文件是放在/WEB-INF/下面,所以前缀如下
-         该文件的后缀为.jsp
+	
+    <!-- 1.配置前端控制器放行静态资源(html/css/js等，否则静态资源将无法访问) -->
+	<mvc:default-servlet-handler/>
+	
+	<!-- 2.配置注解驱动，用于识别注解（比如@Controller） -->
+	<mvc:annotation-driven></mvc:annotation-driven>
+    
+    <!-- 视图解析器:因为html文件是放在/WEB-INF/下面,所以前缀如下
+         该文件的后缀为.html
      -->
 		<context:component-scan base-package="com.ssf.controller"/>
 		<bean class = "org.springframework.web.servlet.view.InternalResourceViewResolver"
 		    >
 		     <property name="prefix" value = "/WEB-INF/"></property>
-		    <property name="suffix" value = ".jsp"></property>
+		    <property name="suffix" value = ".html"></property>
 		    </bean>
 		    
 		<!-- 注解驱动 -->

@@ -15,6 +15,11 @@ import java.util.Random;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
 
+/**
+ * 读取题目,并返回map<题目，答案>
+ * @author 全鸿润
+ *
+ */
 public class FileInputUtil {
 
 	

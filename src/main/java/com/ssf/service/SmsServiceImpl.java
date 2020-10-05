@@ -21,9 +21,8 @@ public class SmsServiceImpl implements SmsService {
 	DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAI4G48J6nwv2ADSWppfFMy", "GzGdBCRhupz9mVr9HGFOuNMs8iAHUt");
 	IAcsClient client = new DefaultAcsClient(profile);
 	String templateCode  = null;
-	public CommonResponse sendMessage(String number) {
+	public CommonResponse sendMessage(String number,String verifycode) {
 		
-		String verifycode = String.valueOf(new Random().nextInt(899999)+100000);
 		CommonRequest request = new CommonRequest();
 		request.setSysMethod(MethodType.POST);
         request.setSysDomain("dysmsapi.aliyuncs.com");
@@ -42,7 +41,6 @@ public class SmsServiceImpl implements SmsService {
         request.putQueryParameter("TemplateParam", "{\"code\":\"2222\"}");
         try {
             CommonResponse response = client.getCommonResponse(request);
-            System.out.println(response.getData());
             return response;
         } catch (ServerException e) {
             e.printStackTrace();
@@ -53,12 +51,18 @@ public class SmsServiceImpl implements SmsService {
         return null;
 	}
 	
+	/**
+	 * 测试用
+	 * @param args
+	 * @throws Exception
+	 * @throws ClientException
+	 */
 	public static void main(String[] args) throws Exception, ClientException {
 		
 		SmsServiceImpl serviceImpl = new SmsServiceImpl();
 		
 		//String templateCode = serviceImpl.addTemplate();
-		CommonResponse response =  serviceImpl.sendMessage("15298917738");
+		CommonResponse response =  serviceImpl.sendMessage("15298917738","234552");
 		System.out.println(response.getData());
 		
 	}

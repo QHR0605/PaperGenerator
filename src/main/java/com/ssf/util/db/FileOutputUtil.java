@@ -11,19 +11,17 @@ import java.util.Date;
 import java.util.List;
 
 
+/**
+ * æ¯ä¸ªç±»å‹å­˜ä¸€ä»½è¯¥ç±»å‹çš„é¢˜ç›®æ–‡ä»¶
+ * @author å…¨é¸¿æ¶¦
+ *
+ */
 public class FileOutputUtil {
 	
 	public static void SavePaper(int nums, List<String> questionList, String type)
 			throws IOException, FileNotFoundException 
 	{
 		
-		
-
-		// »ñÈ¡µ±Ç°Ê±¼ä
-		//SimpleDateFormat format = new SimpleDateFormat("yyyyÄê-MMÔÂ-ddÈÕ-HHÊ±-mm·Ö-ssÃë");
-		//String date = format.format(new Date());
-
-		// ´´½¨¸ÃÀàĞÍÌâÄ¿µÄÎÄ¼ş¼Ğ
 		File file = new File(".//QuestionDB//"+type);
 		if (!file.exists())
 		{

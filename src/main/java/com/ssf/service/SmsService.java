@@ -4,5 +4,5 @@ import com.aliyuncs.CommonResponse;
 
 public interface SmsService {
 	
-	public CommonResponse sendMessage(String number);
+	public CommonResponse sendMessage(String number,String verifcode);
 }

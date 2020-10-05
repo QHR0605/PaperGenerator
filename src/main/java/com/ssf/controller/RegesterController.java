@@ -56,12 +56,15 @@ public class RegesterController {
 		//解析json对象获取手机号
 		JSONObject jsonObject = JSONObject.parseObject(numberjson);
 		String number = jsonObject.getString("phone");
+		
 		JsonResult result = new JsonResult(); 
 		JSONObject json = null;
+		//生成六位随机数
 		String verifycode = String.valueOf(new Random().nextInt(899999)+100000);
 		try {
-			CommonResponse response = sms.sendMessage(number);
+			CommonResponse response = sms.sendMessage(number,verifycode);
 			json = JSON.parseObject(response.getData());
+			//提取关键值Code的值
 			if (!json.getInteger("Code").equals("OK")) {
 				result.setMessage("验证码输入错误");
 				result.setState(2);
@@ -84,8 +87,6 @@ public class RegesterController {
 		return null;
 		
 	}
-	
-	
 	/**
 	 * 获取输入的验证码和手机号码
 	 * 返回的json格式{

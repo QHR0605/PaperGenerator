@@ -20,12 +20,6 @@ import com.ssf.util.json.*;
 import com.ssf.util.makeExpressions.MakeExpressions;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
-/**
- * ������ȥ�����������Ŀ�Ļ���
- * ֱ�ӽ����ļ���ȡ��Ŀ�Ͷ�Ӧ��
- * @author ȫ����
- *
- */
 @Controller
 public class MakeQuestionController {
 	
@@ -40,97 +34,24 @@ public class MakeQuestionController {
 	 * 
 	 * 
 	 * @return 封装题目和答案的Json对象
-	 * @throws IOException 
+	 * @throws Exception 
 	 */
 	@RequestMapping("makequestion.do")
 	@ResponseBody
-	public QuesAndAnswersJson MakeQues(int level , int numbers) throws IOException {
+	public QuesAndAnswersJson MakeQues(int level , int numbers) throws Exception {
 		
-		//小学
-		if (level==0) 
-		{
-			getQuesFromDB = FileInputUtil.GetPrimaryQuestionFromDB("小学");
-			if (getQuesFromDB.size()==0)
-			{
-				for (int i = 0; i < numbers; i++) 
-				{
-					String expression = MakeExpressions.MakeExpression();
-					result.put(Constant.c_declaretion+expression, String.valueOf(new Random().nextInt(6)));
-				}
-			}else 
-			{
-				for (Entry<String, String> entry : getQuesFromDB.entrySet()) 
-				{
-					while (true) 
-					{
-						String expression = MakeExpressions.MakeExpression();
-						if (!expression.equals(entry.getKey())) {
-							result.put(expression, String.valueOf(new Random().nextInt(6)));
-						}
-					}
-				}
-			}
-		}
-		//初中
-		else if (level==1) 
-		{
-			getQuesFromDB = FileInputUtil.GetPrimaryQuestionFromDB("初中");
-			if (getQuesFromDB.size()==0) 
-			{
-				for (int i = 0; i < numbers; i++)
-				{
-					String expression = MakeExpressions.MakeExpression();
-					result.put(Constant.c_declaretion+expression, String.valueOf(new Random().nextInt(6)));
-				}
-			}else 
-			{
-				for (Entry<String, String> entry : getQuesFromDB.entrySet())
-				{
-					while (true) 
-					{
-						String expression = MakeExpressions.MakeExpression();
-						if (!expression.equals(entry.getKey())) 
-						{
-							result.put(expression, String.valueOf(new Random().nextInt(6)));
-						}
-					}
-				}
-			}
-		}
-		//高中
-		else if (level==2) 
-		{
-			getQuesFromDB = FileInputUtil.GetPrimaryQuestionFromDB("高中");
-			if (getQuesFromDB.size()==0) 
-			{
-				for (int i = 0; i < numbers; i++) 
-				{
-					String expression = MakeExpressions.MakeExpression();
-					result.put(Constant.c_declaretion+expression, String.valueOf(new Random().nextInt(6)));
-			
-				}
-			}
-			else 
-			{
-				for (Entry<String, String> entry : getQuesFromDB.entrySet()) 
-				{
-					while (true)
-					{
-						String expression = MakeExpressions.MakeExpression();
-						if (!expression.equals(entry.getKey()))
-						{
-							result.put(expression, String.valueOf(new Random().nextInt(6)));
-						}
-					}
-				}
-			}
-		}
-		
-		json.setM_quesAndanswers(result);
-		json.setState(1); 
-		
+		json = quesService.MakeQues(level, numbers);
 		return json;
 		
 		
+	}
+	
+	public static void main(String[] args) throws Exception {
+		MakeQuestionController controller = new MakeQuestionController();
+		QuesAndAnswersJson json =  controller.MakeQues(0, 10);
+		Map<String, String> map = json.getM_quesAndanswers();
+		for (Entry<String, String> entry:map.entrySet()) {
+			System.out.println(entry.getKey());
+		}
 	}
 }
