@@ -31,16 +31,14 @@ public class SmsServiceImpl implements SmsService {
         request.setSysAction("SendSms");
         request.putQueryParameter("RegionId", "cn-hangzhou");
         request.putQueryParameter("PhoneNumbers", number);
-        request.putQueryParameter("SignName", "×Ô¶¯Éú³ÉÊÔ¾íÏµÍ³");
+        request.putQueryParameter("SignName", "è‡ªåŠ¨ç”Ÿæˆè¯•å·ç³»ç»Ÿ");
         request.putQueryParameter("TemplateCode",  "SMS_204116418");
-     // ¶ÌĞÅÀàĞÍ¡£0£ºÑéÖ¤Âë£»1£º¶ÌĞÅÍ¨Öª£»2£ºÍÆ¹ã¶ÌĞÅ£»3£º¹ú¼Ê/¸Û°ÄÌ¨ÏûÏ¢
+        //0ä¸ºéªŒè¯ç å½¢å¼
         request.putQueryParameter("TemplateType", "0");
-        // Ä£°åÃû³Æ£¬³¤¶ÈÎª1~30¸ö×Ö·û
-        request.putQueryParameter("TemplateName", "×Ô¶¯Éú³ÉÊÔ¾íÏµÍ³");
-        // Ä£°åÄÚÈİ£¬³¤¶ÈÎª1~500¸ö×Ö·û
-        request.putQueryParameter("TemplateContent", "ÄúÕıÔÚÉêÇëÊÖ»ú×¢²á£¬ÑéÖ¤ÂëÎª£º${code}£¬5·ÖÖÓÄÚÓĞĞ§£¡");
-        // ¶ÌĞÅÄ£°åÉêÇëËµÃ÷
-        request.putQueryParameter("Remark", "¸öÈËÍøÕ¾¿ª·¢²âÊÔ");
+        request.putQueryParameter("TemplateName", "è‡ªåŠ¨ç”Ÿæˆè¯•å·ç³»ç»Ÿ");
+        request.putQueryParameter("TemplateContent", "æ‚¨æ­£åœ¨ç”³è¯·æ‰‹æœºæ³¨å†Œï¼ŒéªŒè¯ç ä¸ºï¼š${code}ï¼Œ5åˆ†é’Ÿå†…æœ‰æ•ˆï¼");
+        request.putQueryParameter("Remark", "ä¸ªäººç½‘ç«™å¼€å‘æµ‹è¯•");
+        //è¿™é‡Œè®¾å®šéªŒè¯ç ä¸º2222
         request.putQueryParameter("TemplateParam", "{\"code\":\"2222\"}");
         try {
             CommonResponse response = client.getCommonResponse(request);
@@ -55,31 +53,6 @@ public class SmsServiceImpl implements SmsService {
         return null;
 	}
 	
-	/*
-	private String addTemplate() throws ServerException, ClientException {
-		CommonRequest addSmsTemplateRequest = new CommonRequest();
-        addSmsTemplateRequest.setSysDomain("dysmsapi.aliyuncs.com");
-        addSmsTemplateRequest.setSysAction("AddSmsTemplate");
-        addSmsTemplateRequest.setSysVersion("2017-05-25");
-        // ¶ÌĞÅÀàĞÍ¡£0£ºÑéÖ¤Âë£»1£º¶ÌĞÅÍ¨Öª£»2£ºÍÆ¹ã¶ÌĞÅ£»3£º¹ú¼Ê/¸Û°ÄÌ¨ÏûÏ¢
-        addSmsTemplateRequest.putQueryParameter("TemplateType", "0");
-        // Ä£°åÃû³Æ£¬³¤¶ÈÎª1~30¸ö×Ö·û
-        addSmsTemplateRequest.putQueryParameter("TemplateName", "²âÊÔ¶ÌĞÅÄ£°å");
-        // Ä£°åÄÚÈİ£¬³¤¶ÈÎª1~500¸ö×Ö·û
-        addSmsTemplateRequest.putQueryParameter("TemplateContent", "ÄúÕıÔÚÉêÇëÊÖ»ú×¢²á£¬ÑéÖ¤ÂëÎª£º${code}£¬5·ÖÖÓÄÚÓĞĞ§£¡");
-        // ¶ÌĞÅÄ£°åÉêÇëËµÃ÷
-        addSmsTemplateRequest.putQueryParameter("Remark", "²âÊÔ");
-        CommonResponse addSmsTemplateResponse = client.getCommonResponse(addSmsTemplateRequest);
-        String data = addSmsTemplateResponse.getData();
-        // Ïû³ı·µ»ØÎÄ±¾ÖĞµÄ·´×ªÒå×Ö·û
-        String sData = data.replaceAll("'\'", "");
-        //log_print("addSmsTemplate", sData);
-        Gson gson = new Gson();
-        // ½«×Ö·û´®×ª»»ÎªMapÀàĞÍ£¬È¡TemplateCode×Ö¶ÎÖµ
-        Map map = gson.fromJson(sData, Map.class);
-        Object templateCode = map.get("TemplateCode");
-        return templateCode.toString();
-	}*/
 	public static void main(String[] args) throws Exception, ClientException {
 		
 		SmsServiceImpl serviceImpl = new SmsServiceImpl();

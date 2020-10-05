@@ -4,21 +4,25 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssf.dao.QuesDao;
 import com.ssf.util.db.FileInputUtil;
 import com.ssf.util.json.*;
 
 /**
- * Éú³ÉÌâÄ¿·şÎñ
- * ÏòcontrollerÌá¹©·şÎñ½Ó¿Ú
- * µ÷ÓÃdao²ãÌá¹©µÄÊı¾İ½»»¥½Ó¿Ú
- * @author È«ºèÈó
+ * å‘ä¸‹è°ƒç”¨daoå±‚æ¥å£,å‘ä¸Šç»™controllerå±‚æä¾›æ¥å£
+ * @author å…¨é¸¿æ¶¦
  *
  */
 @Service
 public class QuesServiceImpl implements QuesService {
-
+	
+	
+	@Autowired
+	
+	QuesServiceImpl quesServiceImpl;
 	
 	public QuesAndAnswersJson MakeQues(int level, int numbers) throws Exception {
 
@@ -27,9 +31,9 @@ public class QuesServiceImpl implements QuesService {
 		if (level==0) {
 			map = FileInputUtil.GetPrimaryQuestionFromDB("Ğ¡Ñ§");
 		}else if (level==1) {
-			map = FileInputUtil.GetPrimaryQuestionFromDB("³õÖĞ");
+			map = FileInputUtil.GetPrimaryQuestionFromDB("ï¿½ï¿½ï¿½ï¿½");
 		}else if (level==2) {
-			map = FileInputUtil.GetPrimaryQuestionFromDB("¸ßÖĞ");
+			map = FileInputUtil.GetPrimaryQuestionFromDB("ï¿½ï¿½ï¿½ï¿½");
 		}
 		
 		json.setM_quesAndanswers(map);

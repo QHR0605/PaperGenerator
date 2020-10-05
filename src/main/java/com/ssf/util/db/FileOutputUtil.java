@@ -33,7 +33,7 @@ public class FileOutputUtil {
 				new OutputStreamWriter(new FileOutputStream(".//QuestionDB//"+type+"//"+type+"_Questions.txt"), "UTF-8"));
 		for (int i = 0; i < nums; i++) 
 		{
-			out.write(String.valueOf(i+1)+"."+"请求出表达式"+questionList.get(i)+"的值"+"\n");
+			out.write(questionList.get(i)+"\n");
 			out.flush();
 			out.write("\n");
 			out.flush();

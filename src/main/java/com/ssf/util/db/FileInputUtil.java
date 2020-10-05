@@ -18,7 +18,7 @@ import com.sun.org.apache.bcel.internal.generic.NEW;
 public class FileInputUtil {
 
 	
-	//从文件中获取题目
+	
 		public static Map<String,String> GetPrimaryQuestionFromDB(String type) throws IOException 
 		{
 			
@@ -31,7 +31,7 @@ public class FileInputUtil {
 				file.mkdirs();
 			}
 			
-			//一开始没有相应的题库
+			
 			try 
 			{
 				reader = new BufferedReader(new InputStreamReader(new FileInputStream(".//QuestionDB//"+type+"//"+type+"_Questions.txt"),"UTF-8"));

@@ -3,8 +3,8 @@ package com.ssf.util.json;
 import java.util.Map;
 
 /**
- * map<"题目","答案">
- * @author 全鸿润
+ * map<"棰樼洰鎻忚堪","绛旀">
+ * @author QuesAndAnswerJson
  *
  */
 public class QuesAndAnswersJson extends JsonResult{

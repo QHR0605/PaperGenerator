@@ -7,7 +7,7 @@ public class TreeNode
 	private TreeNode m_right;
 	private String m_sign;
 	
-	//操作符结点,包括当前符号和左右操作数或表达式
+	
 	public TreeNode(String sign, TreeNode m_left, TreeNode m_right)
 	{
 		this.m_sign = sign;
@@ -15,7 +15,7 @@ public class TreeNode
 		this.m_left = m_left;
 	}
 	
-	//操作数结点,左右孩子没有操作数或表达式
+	
 	public TreeNode(String sign) 
 	{
 		this.m_sign = sign;
@@ -45,7 +45,7 @@ public class TreeNode
 		this.m_sign = m_sign;
 	}
 	
-	//判断是否为叶节点
+	
 	public boolean IsLeaf()
 	{
 		if(m_left==null && m_right==null)
@@ -56,21 +56,18 @@ public class TreeNode
 		return false;
 	}
 	
-	/**先给表达式加上括号,根据树的结构采用递归添加括号
-	 * 表达式一般都可以抽象为(object1 op1 object2) op2 (object3 op object4)
-	 * @return
-	 */
+	
 	public String TransformToExpression() 
 	{
 		
 		String leftExpression="",righrExpression = "",curExpression = "";
-		//不是叶节点,说明是个操作符
+		
 		if (!IsLeaf())
 		{
-			//判断右子树是表达式还是操作数
+			
 			if(!getM_right().IsLeaf())
 			{
-				//如果当前操作符为/
+				
 				if(m_sign.equals("/")) 
 				{
 					righrExpression = getM_right().TransformToExpression();
@@ -124,7 +121,7 @@ public class TreeNode
 			
 			curExpression = "("+leftExpression+m_sign+righrExpression+")";
 		}
-		//是叶节点,为操作数
+		
 		else 
 		{
 			

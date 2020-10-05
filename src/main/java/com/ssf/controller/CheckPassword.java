@@ -13,13 +13,13 @@ public class CheckPassword {
 	@RequestMapping("checkpassword.do")
 	public String Checkpassword(String password , String passwordagain) {
 		
-		//Èç¹ûÁ½´ÎÃÜÂëÒ»ÖÂÔòÌø×ªµ½³öÌâ½çÃæ
+		//å¯†ç ä¸€è‡´,å‘é€å‡ºé¢˜è¯·æ±‚
 		if (password.equals(passwordagain)) {
 			return "redirect:makequestion.do";
 		}
 		
-		//²»Ò»ÖÂÔòË¢ĞÂµ±Ç°½çÃæ
-		return "makequestion";
+		//åˆ·æ–°æœ¬é¡µé¢
+		return "checkpassword";
 	}
 	
 }

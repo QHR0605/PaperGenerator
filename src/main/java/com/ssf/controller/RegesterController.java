@@ -18,11 +18,14 @@ import com.aliyuncs.CommonResponse;
 import com.aliyuncs.profile.DefaultProfile;
 
 /**
- * ×¢²á½çÃæ
- * 1.½øÈë×¢²áÒ³Ãæ
- * 2.½ÓÊÕÊÖ»úºÅºÍÑéÖ¤Âë
- * 3.´¦ÀíÇëÇóµÄ·½·¨·µ»Øjson¶ÔÏó{×¢²á×´Ì¬Âë,ÌáÊ¾ĞÅÏ¢};
- * @author È«ºèÈó
+ * 
+ * 1.è·å–æ‰‹æœºå·ç 
+ * 2.ç”ŸæˆéªŒè¯ç å¹¶ä¿å­˜,ä»¥ä¾¿åé¢æŸ¥è¯
+ * 3.è¿”å›çš„jsonå¯¹è±¡{
+ * 	state:
+ *  message:
+ * }
+ * @author å…¨é¸¿æ¶¦
  *
  */
 @Controller
@@ -32,17 +35,8 @@ public class RegesterController {
 	SmsServiceImpl sms;
 	
 	/**
-	 * ÊäÈëÊÖ»úºÅºÍÑéÖ¤ÂëÒ³Ãæ
-	 * ¶ÔÓ¦µÄjspÎÄ¼şÃûÎªreg.jsp
-	 * @return
-	 */
-	@RequestMapping("reg.do")
-	public String reg() {
-		return "reg";
-	}
-	/**
-	 * ·¢ËÍÊÖ»úÑéÖ¤ÂëÇëÇó´¦Àí·½·¨
-	 * ÑéÖ¤Íêºó·µ»Øjson¶ÔÏó{
+	 * å‘é€éªŒè¯ç 
+	 * è¿”å›jsonå¯¹è±¡{
 	 *   
 	 *   state:
 	 *   message:
@@ -52,35 +46,34 @@ public class RegesterController {
 	 * @return
 	 */
 	@RequestMapping("sendsms.do")
-	@ResponseBody  //¸Ã×¢½â±íÊ¾Ö±½Ó·µ»ØÕıÎÄ,²»½øĞĞÒ³ÃæµÄÌø×ª
-	public  JsonResult	sendsms(HttpServletRequest request,String number) {
+	@ResponseBody    
+	public  JsonResult	sendsms(HttpServletRequest request,String numberjson) {
 		
 		/**
-		 * 1.Éú³ÉÑéÖ¤Âë
-		 * 2.µ÷ÓÃ¶ÌĞÅ·¢ËÍµÄAPI
-		 * 3.½«ÑéÖ¤ÂëºÍ´´½¨Ê±¼ä´æÈëjson,Í¬Ê±´æÈësession
-		 * 4.ÉèÖÃjsonµÄÌáÊ¾ĞÅÏ¢
-		 * 5.ÖØ¶¨Ïòµ½ÃÜÂëÈ·¶¨½çÃæ/ÔÚ±¾Ò³Ãæ½øĞĞ´íÎóÌáÊ¾
+		 * 1.ç”Ÿæˆå…­ä½éªŒè¯ç 
+		 * 2.è°ƒç”¨é˜¿é‡Œäº‘API
 		 */
-		JsonResult result = new JsonResult(); //×Ô¶¨ÒåµÄjson¸ñÊ½
+		//è§£æjsonå¯¹è±¡è·å–æ‰‹æœºå·
+		JSONObject jsonObject = JSONObject.parseObject(numberjson);
+		String number = jsonObject.getString("phone");
+		JsonResult result = new JsonResult(); 
 		JSONObject json = null;
 		String verifycode = String.valueOf(new Random().nextInt(899999)+100000);
 		try {
 			CommonResponse response = sms.sendMessage(number);
 			json = JSON.parseObject(response.getData());
 			if (!json.getInteger("Code").equals("OK")) {
-				result.setMessage("ÑéÖ¤Âë·¢ËÍÊ§°Ü!ÇëÖØÊÔ");
+				result.setMessage("éªŒè¯ç è¾“å…¥é”™è¯¯");
 				result.setState(2);
 			}
 			
-			//result.setMessage("ÑéÖ¤Âë³É¹¦!");
 			result.setState(1);
-			result.setMessage("ÑéÖ¤Âë·¢ËÍ³É¹¦!");
+			result.setMessage("éªŒè¯ç è¾“å…¥æ­£ç¡®");
 			
-			HttpSession session = request.getSession(); //´æÈësessionÒÔ±ãºÍºóĞøÊäÈëµÄÑéÖ¤Âë±È½Ï
+			HttpSession session = request.getSession(); //sessionå­˜å‚¨ç”Ÿæˆçš„éªŒè¯ç å’Œåˆ›å»ºæ—¶é—´
 			json = new JSONObject();
-			json.put("verifycode", verifycode); //ÑéÖ¤Âë
-			json.put("createTime", System.currentTimeMillis());//´´½¨Ê±¼ä
+			json.put("verifycode", verifycode); 
+			json.put("createTime", System.currentTimeMillis());
 			session.setAttribute("verifcode", json);
 			
 			return result;
@@ -94,8 +87,8 @@ public class RegesterController {
 	
 	
 	/**
-	 * ½ÓÊÕÊÖ»úºÅÂëºÍÑéÖ¤Âë
-	 * ÑéÖ¤Íêºó·µ»Øjson¶ÔÏó{
+	 * è·å–è¾“å…¥çš„éªŒè¯ç å’Œæ‰‹æœºå·ç 
+	 * è¿”å›çš„jsonæ ¼å¼{
 	 *   
 	 *   state:
 	 *   message:
@@ -106,21 +99,19 @@ public class RegesterController {
 	 */
 	@RequestMapping("handle_reg.do")
 	@ResponseBody
-	public String handle_reg(String number,String verrifcode,HttpSession session) {
+	public String handle_reg(String verifcodejson,HttpSession session) {
 		
-		JSONObject jsonObject = (JSONObject) session.getAttribute(verrifcode);
+		JSONObject vericodeJsonObject = JSONObject.parseObject(verifcodejson);
+		String verrifcode = vericodeJsonObject.getString("verifcode"); //æå–å‡ºè¾“å…¥çš„éªŒè¯ç 
+		JSONObject jsonObject = (JSONObject) session.getAttribute(verrifcode); //ä¹‹å‰å­˜å…¥çš„éªŒè¯ç 
 		JsonResult result = new JsonResult();
 		if (!verrifcode.equals(jsonObject.getString(verrifcode))) {
 			result.setState(2);
-			result.setMessage("ÑéÖ¤ÂëÊäÈë´íÎó,ÇëÖØÊÔ");
+			result.setMessage("éªŒè¯ç è¾“å…¥é”™è¯¯!");
 		}
 		
 		result.setState(1);
-		result.setMessage("ÑéÖ¤ÂëÊäÈëÕıÈ·");
-		return "redirect:chackpassword.do"; //ÖØ¶¨Ïò×ªµ½ÊäÈëÃÜÂëÒ³Ãæ
-	}
-	
-	public static void main(String[] args) {
-		
+		result.setMessage("éªŒè¯ç è¾“å…¥æ­£ç¡®");
+		return "redirect:chackpassword.do"; //è·³è½¬åˆ°è®¾ç½®å¯†ç ç•Œé¢
 	}
 }

@@ -1,17 +1,29 @@
 package com.ssf.controller;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssf.service.QuesServiceImpl;
+import com.ssf.util.constant.Constant;
+import com.ssf.util.db.FileInputUtil;
 import com.ssf.util.json.*;
+import com.ssf.util.makeExpressions.MakeExpressions;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 /**
- * ÕâÀïÃâÈ¥ÁËËæ»úÉú³ÉÌâÄ¿µÄ»·½Ú
- * Ö±½Ó½øĞĞÎÄ¼ş¶ÁÈ¡ÌâÄ¿ºÍ¶ÔÓ¦´ğ°¸
- * @author È«ºèÈó
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½Ä»ï¿½ï¿½ï¿½
+ * Ö±ï¿½Ó½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½È¡ï¿½ï¿½Ä¿ï¿½Í¶ï¿½Ó¦ï¿½ï¿½
+ * @author È«ï¿½ï¿½ï¿½ï¿½
  *
  */
 @Controller
@@ -20,24 +32,104 @@ public class MakeQuestionController {
 	@Autowired
 	QuesServiceImpl quesService;
 	
-	
+	Map<String,String> getQuesFromDB = new HashMap<String, String>();//é¢˜åº“é‡Œçš„é¢˜,ç”¨äºæŸ¥é‡
+	Map<String, String> result = new HashMap<String, String>();//å½“å‰ç”Ÿæˆçš„ä¸€å¥—é¢˜å’Œå¯¹åº”ç­”æ¡ˆ
+	List<String> expressions = new LinkedList<String>();
+	QuesAndAnswersJson json;
 	/**
-	 * µ÷ÓÃÎÄ¼şÊäÈëÁ÷È¡³öËùÓĞÊÔÌâ
-	 * ÔÙÈ¥ÖØ
-	 * @return
+	 * 
+	 * 
+	 * @return å°è£…é¢˜ç›®å’Œç­”æ¡ˆçš„Jsonå¯¹è±¡
+	 * @throws IOException 
 	 */
 	@RequestMapping("makequestion.do")
 	@ResponseBody
-	public QuesAndAnswersJson MakeQues(int level , int number) {
+	public QuesAndAnswersJson MakeQues(int level , int numbers) throws IOException {
 		
-		if (level==0) {
-			
-		}else if (level==1) {
-			
-		}else if (level==2) {
-			
+		//å°å­¦
+		if (level==0) 
+		{
+			getQuesFromDB = FileInputUtil.GetPrimaryQuestionFromDB("å°å­¦");
+			if (getQuesFromDB.size()==0)
+			{
+				for (int i = 0; i < numbers; i++) 
+				{
+					String expression = MakeExpressions.MakeExpression();
+					result.put(Constant.c_declaretion+expression, String.valueOf(new Random().nextInt(6)));
+				}
+			}else 
+			{
+				for (Entry<String, String> entry : getQuesFromDB.entrySet()) 
+				{
+					while (true) 
+					{
+						String expression = MakeExpressions.MakeExpression();
+						if (!expression.equals(entry.getKey())) {
+							result.put(expression, String.valueOf(new Random().nextInt(6)));
+						}
+					}
+				}
+			}
 		}
-		return null;
+		//åˆä¸­
+		else if (level==1) 
+		{
+			getQuesFromDB = FileInputUtil.GetPrimaryQuestionFromDB("åˆä¸­");
+			if (getQuesFromDB.size()==0) 
+			{
+				for (int i = 0; i < numbers; i++)
+				{
+					String expression = MakeExpressions.MakeExpression();
+					result.put(Constant.c_declaretion+expression, String.valueOf(new Random().nextInt(6)));
+				}
+			}else 
+			{
+				for (Entry<String, String> entry : getQuesFromDB.entrySet())
+				{
+					while (true) 
+					{
+						String expression = MakeExpressions.MakeExpression();
+						if (!expression.equals(entry.getKey())) 
+						{
+							result.put(expression, String.valueOf(new Random().nextInt(6)));
+						}
+					}
+				}
+			}
+		}
+		//é«˜ä¸­
+		else if (level==2) 
+		{
+			getQuesFromDB = FileInputUtil.GetPrimaryQuestionFromDB("é«˜ä¸­");
+			if (getQuesFromDB.size()==0) 
+			{
+				for (int i = 0; i < numbers; i++) 
+				{
+					String expression = MakeExpressions.MakeExpression();
+					result.put(Constant.c_declaretion+expression, String.valueOf(new Random().nextInt(6)));
+			
+				}
+			}
+			else 
+			{
+				for (Entry<String, String> entry : getQuesFromDB.entrySet()) 
+				{
+					while (true)
+					{
+						String expression = MakeExpressions.MakeExpression();
+						if (!expression.equals(entry.getKey()))
+						{
+							result.put(expression, String.valueOf(new Random().nextInt(6)));
+						}
+					}
+				}
+			}
+		}
+		
+		json.setM_quesAndanswers(result);
+		json.setState(1); 
+		
+		return json;
 		
 		
 	}
