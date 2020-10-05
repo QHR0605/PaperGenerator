@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<div id="root"></div>
+<script src="static/js/react.production.min.js"></script>
+<script src="static/js/react-dom.production.min.js"></script>
+<script src="static/js/babel.min.js"></script>
+<link rel="stylesheet" href="index.css" type="text/css">
+<script src="utils/URL.js"></script>
+<script type="text/babel">
+
+    // 最初的登录界面
+    const Login = () => {
+        const [state, setState] = React.useState({phone: ''});
+
+        // 发送json数据{phone: ...}给服务端
+        const handleClick = () => {
+            fetch(URL.doLogin, {
+                method: 'POST',
+                body: JSON.stringify(state)
+            }).then(async resp => {
+                const data = await resp.json();
+                console.log('receive', data);
+            }).catch(e => {
+                console.log(e);
+            })
+        }
+
+        console.log(URL.doLogin);
+
+        return <div className="container">
+            <div className="header">Login</div>
+            <div className="input-wrapper">
+                <div className="border-wrapper">
+                    <input type="text"
+                           className="border-item"
+                           placeholder="phone number"
+                           onChange={event => {
+                               const phone = event.target.value;
+                               setState(p => ({phone}));
+                               console.log(state);
+                           }}/>
+                </div>
+            </div>
+            <div className="action">
+                <div className="btn"
+                     onClick={handleClick}>获取验证码
+                </div>
+            </div>
+        </div>;
+    }
+
+    ReactDOM.render(
+        <Login/>, document.getElementById('root'))
+</script>
+</body>
+</html>
