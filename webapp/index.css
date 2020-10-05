@@ -37,11 +37,17 @@ body {
     width: 100%;
     text-align: center;
     font-size: 15px;
+    letter-spacing: 1px;
     color: white;
+    outline: none;
 }
 
 .container .input-wrapper input::placeholder {
     text-transform: uppercase;
+}
+
+.container .input-wrapper input:focus {
+    background-color: rgb(51, 55, 72);
 }
 
 .container .input-wrapper .border-wrapper {
