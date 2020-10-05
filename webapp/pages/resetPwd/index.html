@@ -9,5 +9,39 @@
 <script src="../../static/js/react.production.min.js"></script>
 <script src="../../static/js/react-dom.production.min.js"></script>
 <script src="../../static/js/babel.min.js"></script>
+<script src="../../utils/URL.js"></script>
+<link rel="stylesheet" href="index.css" type="text/css">
+<script type="text/babel">
+
+    // 设置密码的界面
+    const Index = () => {
+
+        return <div className="container">
+            <div className="header">Set Password</div>
+            <div className="input-wrapper">
+                <div className="border-wrapper">
+                    <input type="text"
+                           className="border-item"
+                           placeholder="new password"
+                    />
+                </div>
+            </div>
+            <div className="input-wrapper">
+                <div className="border-wrapper">
+                    <input type="text"
+                           className="border-item"
+                           placeholder="confirm password"
+                    />
+                </div>
+            </div>
+            <div className="action">
+                <div className="btn">获取验证码</div>
+            </div>
+        </div>;
+    }
+
+    ReactDOM.render(
+        <Index/>, document.getElementById('root'))
+</script>
 </body>
 </html>
