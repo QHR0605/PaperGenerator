@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 
 /**
@@ -30,9 +31,9 @@ public class FileOutputUtil {
 		}
 		PrintWriter out = new PrintWriter(
 				new OutputStreamWriter(new FileOutputStream(".//QuestionDB//"+type+"//"+type+"_Questions.txt"), "UTF-8"));
-		for (int i = 0; i < nums; i++) 
+		for (Entry<Integer, String> entry: questionList.entrySet() ) 	
 		{
-			out.write(questionList.get(i)+"\n");
+			out.write(entry.getValue()+"\n");
 			out.flush();
 			out.write("\n");
 			out.flush();

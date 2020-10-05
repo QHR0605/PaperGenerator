@@ -50,6 +50,7 @@ public class FileInputUtil {
 			} catch (Exception e) 
 			{
 				return new HashMap();
+				
 			}
 			
 			return result;

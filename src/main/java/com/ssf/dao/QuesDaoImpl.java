@@ -8,6 +8,9 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Map.Entry;
 
+import org.apache.jasper.tagplugins.jstl.core.If;
+
+import com.alibaba.fastjson.asm.Label;
 import com.ssf.util.constant.Constant;
 import com.ssf.util.db.FileInputUtil;
 import com.ssf.util.db.FileOutputUtil;
@@ -38,19 +41,24 @@ public class QuesDaoImpl implements QuesDao {
 					String expression = MakeExpressions.MakeExpression();
 					result.put(i,expression+"=");
 				}
-			}else 
+			}
+			else 
 			{
-				for (Entry<Integer, String> entry : getQuesFromDB.entrySet()) 
-				{
-					int count = 0;
-					while (true) 
-					{
-						String expression = MakeExpressions.MakeExpression();
-						if (!expression.equals(entry.getKey())) {
-							result.put( count++,expression+"=");
+				int count = 0;
+				Label1:	while (true) 
+					{   
+						for (Entry<Integer, String> entry : getQuesFromDB.entrySet()) {
+							
+							if (count>=numbers) {
+								break Label1;
+							}
+							String expression = MakeExpressions.MakeExpression();
+							if (!expression.equals(entry.getKey())) {
+								result.put( count++,expression+"=");
+							}
 						}
+						
 					}
-				}
 			}
 		}
 		
@@ -65,17 +73,21 @@ public class QuesDaoImpl implements QuesDao {
 				}
 			}else 
 			{
-				for (Entry<Integer, String> entry : getQuesFromDB.entrySet()) 
-				{
-					int count = 0;
-					while (true) 
-					{
-						String expression = MakeExpressions.MakeExpression();
-						if (!expression.equals(entry.getKey())) {
-							result.put(count++,expression+"=");
+				int count = 0;
+				Label1:	while (true) 
+					{   
+						for (Entry<Integer, String> entry : getQuesFromDB.entrySet()) {
+							
+							if (count>=numbers) {
+								break Label1;
+							}
+							String expression = MakeExpressions.MakeMiddleExpression();
+							if (!expression.equals(entry.getKey())) {
+								result.put( count++,expression+"=");
+							}
 						}
+						
 					}
-				}
 			}
 		}
 		
@@ -91,17 +103,21 @@ public class QuesDaoImpl implements QuesDao {
 				}
 			}else 
 			{
-				for (Entry<Integer, String> entry : getQuesFromDB.entrySet()) 
-				{   
-					int count = 0;
-					while (true) 
-					{
-						String expression = MakeExpressions.MakeExpression();
-						if (!expression.equals(entry.getKey())) {
-							result.put(count++,expression+"=");
+				int count = 0;
+				Label1:	while (true) 
+					{   
+						for (Entry<Integer, String> entry : getQuesFromDB.entrySet()) {
+							
+							if (count>=numbers) {
+								break Label1;
+							}
+							String expression = MakeExpressions.MakeHightExprssion();
+							if (!expression.equals(entry.getKey())) {
+								result.put( count++,expression+"=");
+							}
 						}
+						
 					}
-				}
 			}
 		}
 		

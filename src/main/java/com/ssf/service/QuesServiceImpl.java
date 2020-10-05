@@ -33,9 +33,9 @@ public class QuesServiceImpl implements QuesService {
 		if (level.equals("小学")) {
 			map = quesDaoImpl.GetPaper(level, numbers);
 		}else if (level.equals("初中")) {
-			map = quesDaoImpl.GetPaper("初中", numbers);
+			map = quesDaoImpl.GetPaper(level, numbers);
 		}else if (level.equals("高中")) {
-			map = quesDaoImpl.GetPaper("高中", numbers);
+			map = quesDaoImpl.GetPaper(level, numbers);
 		}
 		
 		json.setM_quesAndanswers(map);
@@ -43,13 +43,21 @@ public class QuesServiceImpl implements QuesService {
 		return json;
 	}
 	
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 		
 		QuesServiceImpl serviceImpl = new QuesServiceImpl();
-		QuesAndAnswersJson json =  serviceImpl.MakeQues("高中", "10");
+		QuesAndAnswersJson json = null;
+		
+		try {
+			json = serviceImpl.MakeQues("小学", "10");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Map<Integer,String> map = json.getM_quesAndanswers();
-		for (int i = 0; i < json.getM_quesAndanswers().size(); i++) {
-			
+		System.out.println(map.size());
+		int size = json.getM_quesAndanswers().size();
+		for (int i = 0; i < size; i++) {
 			System.out.println(map.get(i));
 		}
 	}
