@@ -1,4 +1,4 @@
-package com.ssf.util;
+package com.ssf.util.json;
 
 public class JsonResult {
 

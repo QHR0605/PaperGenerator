@@ -1,7 +1,12 @@
-package com.ssf.util;
+package com.ssf.util.json;
 
 import java.util.Map;
 
+/**
+ * map<"题目","答案">
+ * @author 全鸿润
+ *
+ */
 public class QuesAndAnswersJson extends JsonResult{
 	
 	private Map<String, String> m_quesAndanswers;

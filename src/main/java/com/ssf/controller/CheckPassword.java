@@ -4,27 +4,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ssf.util.JsonResult;
+import com.ssf.util.json.*;
 
 @Controller
 public class CheckPassword {
 
 	
-	@RequestMapping("chackpassword.do")
+	@RequestMapping("checkpassword.do")
 	public String Checkpassword(String password , String passwordagain) {
 		
-		JsonResult result = new JsonResult();
-		
-		if(!password.equals(passwordagain)) {
-			
-			result.setState(2);
-			result.setMessage("两次输入的密码不正确,请重新输入");
+		//如果两次密码一致则跳转到出题界面
+		if (password.equals(passwordagain)) {
+			return "redirect:makequestion.do";
 		}
 		
-		result.setState(1);
-		result.setMessage("注册成功");
-		
-		return "下一个页面视图名称";
+		//不一致则刷新当前界面
+		return "makequestion";
 	}
 	
 }

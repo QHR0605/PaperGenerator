@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssf.service.SmsServiceImpl;
-import com.ssf.util.JsonResult;
+import com.ssf.util.json.*;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 import com.alibaba.fastjson.*;
 import com.aliyuncs.CommonResponse;
@@ -118,5 +118,9 @@ public class RegesterController {
 		result.setState(1);
 		result.setMessage("验证码输入正确");
 		return "redirect:chackpassword.do"; //重定向转到输入密码页面
+	}
+	
+	public static void main(String[] args) {
+		
 	}
 }
