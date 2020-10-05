@@ -10,32 +10,60 @@
 <script src="../../static/js/react-dom.production.min.js"></script>
 <script src="../../static/js/babel.min.js"></script>
 <script src="../../utils/URL.js"></script>
+<script src="../../utils/upload.js"></script>
 <link rel="stylesheet" href="index.css" type="text/css">
 <script type="text/babel">
 
     // 设置密码的界面
     const Index = () => {
+        const [pwd1, setPwd1] = React.useState('');
+        const [pwd2, setPwd2] = React.useState('');
+        const [hint, setHint] = React.useState('');
+        const ERR_HINT = "两次输入的密码不一致，请重试:)";
+
+        const onChange1 = e => {
+            const pwd = e.target.value;
+            setPwd1(pre => pwd);
+        }
+
+        const onChange2 = e => {
+            const pwd = e.target.value;
+            setPwd2(pre => pwd);
+        }
+
+        const onSubmit = () => {
+            if (pwd1 !== pwd2) {
+                setHint(p => ERR_HINT);
+            } else {
+                setHint(p => '');
+                // 发送密码
+                upload(URL.doSavePwd, 'POST', {pwd: pwd1});
+            }
+        }
 
         return <div className="container">
             <div className="header">Set Password</div>
             <div className="input-wrapper">
                 <div className="border-wrapper">
-                    <input type="text"
+                    <input type="password"
                            className="border-item"
                            placeholder="new password"
+                           onChange={onChange1}
                     />
                 </div>
             </div>
             <div className="input-wrapper">
                 <div className="border-wrapper">
-                    <input type="text"
+                    <input type="password"
                            className="border-item"
                            placeholder="confirm password"
+                           onChange={onChange2}
                     />
                 </div>
             </div>
+            <div className="hint">{hint}</div>
             <div className="action">
-                <div className="btn">获取验证码</div>
+                <div className="btn" onClick={onSubmit}>submit</div>
             </div>
         </div>;
     }
