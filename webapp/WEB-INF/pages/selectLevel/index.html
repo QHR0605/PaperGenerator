@@ -10,7 +10,72 @@
 <script src="../../static/js/react-dom.production.min.js"></script>
 <script src="../../static/js/babel.min.js"></script>
 <script src="../../utils/URL.js"></script>
+<script src="../../utils/upload.js"></script>
 <link rel="stylesheet" href="index.css" type="text/css">
+<script type="text/babel">
+    const Index = () => {
+        const [list, setList] = React.useState([
+            "小学", "初中", "高中"
+        ]);
+        const [level, setLevel] = React.useState('');
+        const [num, setNum] = React.useState(10);
+        const [hint, setHint] = React.useState('');
+        const ERR_HINT = '请输入10~30';
 
+        const onSubmit = () => {
+            if (isNaN(num) || num < 10 || num > 30) {
+                setHint(p => ERR_HINT);
+            } else {
+                setHint(p => '')
+                const payload = {
+                    level: level,
+                    number: num
+                };
+                console.log(payload);
+                upload(URL.doSelectLevel, 'POST', payload);
+            }
+        }
+
+        return <div className="container">
+            <div className="header">Choose Level</div>
+            <div>
+                {
+                    list.map(elm => {
+                        return <div className="action">
+                            <div className="btn"
+                                 onClick={e => {
+                                     setList(p => [elm]);
+                                     setLevel(p => elm);
+                                 }}>
+                                {elm}
+                            </div>
+                        </div>
+                    })
+                }
+            </div>
+            <div className="input-wrapper">
+                <div className="border-wrapper">
+                    <input type="text"
+                           className="border-item"
+                           placeholder="how many"
+                           onChange={e => {
+                               const val = e.target.value;
+                               setNum(p => val);
+                           }}
+                    />
+                </div>
+            </div>
+            <div className="hint">{hint}</div>
+            <div className="action">
+                <div className="btn"
+                     onClick={onSubmit}>submit
+                </div>
+            </div>
+        </div>
+    }
+
+    ReactDOM.render(
+        <Index/>, document.getElementById('root'));
+</script>
 </body>
 </html>
