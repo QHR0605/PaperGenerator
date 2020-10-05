@@ -22,9 +22,7 @@ import com.ssf.util.json.*;
 public class QuesServiceImpl implements QuesService {
 	
 	
-	@Autowired
-	
-	QuesDaoImpl quesDaoImpl;
+	QuesDaoImpl quesDaoImpl = new QuesDaoImpl();
 	
 	public QuesAndAnswersJson MakeQues(int level, int numbers) throws Exception {
 
