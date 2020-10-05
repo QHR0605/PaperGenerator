@@ -1,3 +1,4 @@
 const URL = {
-    doLogin: "http://"
+    doLogin: "http://",
+    doSavePwd: "http://"
 }

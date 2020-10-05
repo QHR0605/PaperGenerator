@@ -1,6 +1,11 @@
 eclipse.preferences.version=1
+encoding//src/main/java=UTF-8
 encoding//src/main/java/com/ssf/util/constant/Constant.java=UTF-8
 encoding//src/main/java/com/ssf/util/insertoperators/InsertSquare.java=UTF-8
 encoding//src/main/java/com/ssf/util/makeExpressions/MakeExpressions.java=UTF-8
 encoding//src/main/java/com/ssf/util/random/RandomUtil.java=UTF-8
+<<<<<<< HEAD
+=======
+encoding//src/main/resources=UTF-8
+>>>>>>> 135285127389a96a18bf07efabe33bab5880c62e
 encoding/<project>=UTF-8
