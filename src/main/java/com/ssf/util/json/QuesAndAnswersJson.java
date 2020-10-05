@@ -7,15 +7,15 @@ import java.util.Map;
  * @author QuesAndAnswerJson
  *
  */
-public class QuesAndAnswersJson extends JsonResult{
+public class QuesAndAnswersJson{
 	
-	private Map<String, String> m_quesAndanswers;
+	private Map<Integer, String> m_quesAndanswers;
 
-	public Map<String, String> getM_quesAndanswers() {
+	public Map<Integer, String> getM_quesAndanswers() {
 		return m_quesAndanswers;
 	}
 
-	public void setM_quesAndanswers(Map<String, String> m_quesAndanswers) {
+	public void setM_quesAndanswers(Map<Integer, String> m_quesAndanswers) {
 		this.m_quesAndanswers = m_quesAndanswers;
 	}
 	

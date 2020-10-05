@@ -10,42 +10,103 @@ import java.util.Map.Entry;
 
 import com.ssf.util.constant.Constant;
 import com.ssf.util.db.FileInputUtil;
+import com.ssf.util.db.FileOutputUtil;
 import com.ssf.util.json.QuesAndAnswersJson;
 import com.ssf.util.makeExpressions.MakeExpressions;
 
 public class QuesDaoImpl implements QuesDao {
 	
-	Map<String,String> getQuesFromDB = new HashMap<String, String>();//题库里的题,用于查重
-	Map<String, String> result = new HashMap<String, String>();//当前生成的一套题和对应答案
+	Map<Integer,String> getQuesFromDB = new HashMap<Integer, String>();//题库里的题,用于查重
+	Map<Integer, String> result = new HashMap<Integer, String>();//当前生成的一套题和对应答案
 	List<String> expressions = new LinkedList<String>();
 
 	/**
 	 * 接收类型和数目,返回map
 	 */
 	@Override
-	public Map<String, String> GetPaper(String level, int numbers) throws IOException {
+	public Map<Integer, String> GetPaper(String level, int numbers) throws IOException {
+		
 		
 		getQuesFromDB = FileInputUtil.GetPrimaryQuestionFromDB(level);
-		if (getQuesFromDB.size()==0)
+		
+		if (level.equals("小学")) 
 		{
-			for (int i = 0; i < numbers; i++) 
+			if (getQuesFromDB.size()==0)
 			{
-				String expression = MakeExpressions.MakeExpression();
-				result.put(Constant.c_declaretion+expression, String.valueOf(new Random().nextInt(6)));
-			}
-		}else 
-		{
-			for (Entry<String, String> entry : getQuesFromDB.entrySet()) 
-			{
-				while (true) 
+				for (int i = 0; i < numbers; i++) 
 				{
 					String expression = MakeExpressions.MakeExpression();
-					if (!expression.equals(entry.getKey())) {
-						result.put(expression, String.valueOf(new Random().nextInt(6)));
+					result.put(i,expression+"=");
+				}
+			}else 
+			{
+				for (Entry<Integer, String> entry : getQuesFromDB.entrySet()) 
+				{
+					int count = 0;
+					while (true) 
+					{
+						String expression = MakeExpressions.MakeExpression();
+						if (!expression.equals(entry.getKey())) {
+							result.put( count++,expression+"=");
+						}
 					}
 				}
 			}
 		}
+		
+		if (level.equals("初中")) 
+		{
+			if (getQuesFromDB.size()==0)
+			{
+				for (int i = 0; i < numbers; i++) 
+				{
+					String expression = MakeExpressions.MakeMiddleExpression();
+					result.put(i,expression+"=");
+				}
+			}else 
+			{
+				for (Entry<Integer, String> entry : getQuesFromDB.entrySet()) 
+				{
+					int count = 0;
+					while (true) 
+					{
+						String expression = MakeExpressions.MakeExpression();
+						if (!expression.equals(entry.getKey())) {
+							result.put(count++,expression+"=");
+						}
+					}
+				}
+			}
+		}
+		
+		
+		if (level.equals("高中")) 
+		{
+			if (getQuesFromDB.size()==0)
+			{
+				for (int i = 0; i < numbers; i++) 
+				{
+					String expression = MakeExpressions.MakeHightExprssion();
+					result.put(i,expression+"=");
+				}
+			}else 
+			{
+				for (Entry<Integer, String> entry : getQuesFromDB.entrySet()) 
+				{   
+					int count = 0;
+					while (true) 
+					{
+						String expression = MakeExpressions.MakeExpression();
+						if (!expression.equals(entry.getKey())) {
+							result.put(count++,expression+"=");
+						}
+					}
+				}
+			}
+		}
+		
+		
+		FileOutputUtil.SavePaper(numbers, result, level); //存入题库
 		
 		return result;
 	}

@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -18,7 +19,7 @@ import java.util.List;
  */
 public class FileOutputUtil {
 	
-	public static void SavePaper(int nums, List<String> questionList, String type)
+	public static void SavePaper(int nums, Map<Integer, String> questionList, String type)
 			throws IOException, FileNotFoundException 
 	{
 		

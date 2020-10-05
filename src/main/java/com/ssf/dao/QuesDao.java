@@ -11,5 +11,5 @@ import com.ssf.util.json.QuesAndAnswersJson;
 public interface QuesDao {
 	
 	
-	public Map<String, String> GetPaper(String level,int numbers) throws IOException;
+	public Map<Integer, String> GetPaper(String level,int numbers) throws IOException;
 }

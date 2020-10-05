@@ -27,16 +27,32 @@
 	<!-- 2.配置注解驱动，用于识别注解（比如@Controller） -->
 	<mvc:annotation-driven></mvc:annotation-driven>
     
-    <!-- 视图解析器:因为html文件是放在/WEB-INF/下面,所以前缀如下
-         该文件的后缀为.html
-     -->
+    
 		<context:component-scan base-package="com.ssf.controller"/>
+		
+		<!-- 视图解析器:因为jsp文件是放在/WEB-INF/下面,所以前缀如下
+         	该文件的后缀为.jsp
+     	-->
 		<bean class = "org.springframework.web.servlet.view.InternalResourceViewResolver"
 		    >
-		     <property name="prefix" value = "/WEB-INF/"></property>
-		    <property name="suffix" value = ".html"></property>
+		     <property name="prefix" value = "/WEN-INF/"></property>
+		    <property name="suffix" value = ".jsp"></property>
+		    <property name="order" value = "0"></property>
 		    </bean>
+		
+		<bean class = "org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
 		    
+		    <property name="templateLoaderPath" value = "/WEB-INF/pages/*/"></property>
+		    
+		</bean>
+		<!--html解析器  -->
+		<bean id = "htmlviewResolver" class = "org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		    
+		    <property name="suffix" value = ".html"></property>
+		    <property name="order" value = "0"></property>
+		    <property name="contentType" value = "text/html;charset = UTF-8"></property>
+		</bean>
+		
 		<!-- 注解驱动 -->
 		<mvc:annotation-driven/>
 		    

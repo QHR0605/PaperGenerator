@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONObject;
 import com.ssf.service.QuesServiceImpl;
 import com.ssf.util.constant.Constant;
 import com.ssf.util.db.FileInputUtil;
@@ -38,20 +39,15 @@ public class MakeQuestionController {
 	 */
 	@RequestMapping("makequestion.do")
 	@ResponseBody
-	public QuesAndAnswersJson MakeQues(int level , int numbers) throws Exception {
+	public QuesAndAnswersJson MakeQues(String quesjson) throws Exception{
 		
+		
+		JSONObject jsonObject = JSONObject.parseObject(quesjson);
+		String level = jsonObject.getString("level");
+		String numbers = jsonObject.getString("number");
 		json = quesService.MakeQues(level, numbers);
 		return json;
 		
 		
-	}
-	
-	public static void main(String[] args) throws Exception {
-		MakeQuestionController controller = new MakeQuestionController();
-		QuesAndAnswersJson json =  controller.MakeQues(0, 10);
-		Map<String, String> map = json.getM_quesAndanswers();
-		for (Entry<String, String> entry:map.entrySet()) {
-			System.out.println(entry.getKey());
-		}
 	}
 }

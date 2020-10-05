@@ -24,12 +24,12 @@ public class FileInputUtil {
 
 	
 	
-		public static Map<String,String> GetPrimaryQuestionFromDB(String type) throws IOException 
+		public static Map<Integer, String> GetPrimaryQuestionFromDB(String type) throws IOException 
 		{
 			
 			
 			BufferedReader reader = null;
-			Map<String, String> result = new HashMap<String, String>();
+			Map<Integer, String> result = new HashMap<Integer, String>();
 			File file = new File(".//QuestionDB//"+type);
 			if (!file.exists())
 			{
@@ -41,9 +41,10 @@ public class FileInputUtil {
 			{
 				reader = new BufferedReader(new InputStreamReader(new FileInputStream(".//QuestionDB//"+type+"//"+type+"_Questions.txt"),"UTF-8"));
 				String line = null;
+				int count = 0;
 				while ((line=reader.readLine())!=null) 
 				{
-					result.put(line, String.valueOf(new Random().nextInt(6)));
+					result.put(count++,line);
 				}
 				reader.close();
 			} catch (Exception e) 

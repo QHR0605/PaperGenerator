@@ -4,5 +4,5 @@ import com.ssf.util.json.*;
 
 public interface QuesService {
 		
-	public QuesAndAnswersJson MakeQues(int level,int numbers) throws Exception;
+	public QuesAndAnswersJson MakeQues(String level,String numbers) throws Exception;
 }

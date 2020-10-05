@@ -34,6 +34,12 @@ public class RegesterController {
 	@Autowired
 	SmsServiceImpl sms;
 	
+	@RequestMapping("reg.do")
+	public String reg() {
+		
+		return "reg";
+	}
+	
 	/**
 	 * 发送验证码
 	 * 返回json对象{
@@ -75,9 +81,9 @@ public class RegesterController {
 			
 			HttpSession session = request.getSession(); //session存储生成的验证码和创建时间
 			json = new JSONObject();
-			json.put("verifycode", verifycode); 
+			json.put("verification", verifycode); 
 			json.put("createTime", System.currentTimeMillis());
-			session.setAttribute("verifcode", json);
+			session.setAttribute("verification", json);
 			
 			return result;
 		} catch (Exception e) {
@@ -100,10 +106,10 @@ public class RegesterController {
 	 */
 	@RequestMapping("handle_reg.do")
 	@ResponseBody
-	public String handle_reg(String verifcodejson,HttpSession session) {
+	public JsonResult handle_reg(String verifcodejson,HttpSession session) {
 		
 		JSONObject vericodeJsonObject = JSONObject.parseObject(verifcodejson);
-		String verrifcode = vericodeJsonObject.getString("verifcode"); //提取出输入的验证码
+		String verrifcode = vericodeJsonObject.getString("verification"); //提取出输入的验证码
 		JSONObject jsonObject = (JSONObject) session.getAttribute(verrifcode); //之前存入的验证码
 		JsonResult result = new JsonResult();
 		if (!verrifcode.equals(jsonObject.getString(verrifcode))) {
@@ -113,6 +119,6 @@ public class RegesterController {
 		
 		result.setState(1);
 		result.setMessage("验证码输入正确");
-		return "redirect:chackpassword.do"; //跳转到设置密码界面
+		return result;
 	}
 }
