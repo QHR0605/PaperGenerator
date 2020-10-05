@@ -37,7 +37,13 @@ body {
     width: 100%;
     text-align: center;
     font-size: 15px;
+    letter-spacing: 1px;
     color: white;
+    outline: none;
+}
+
+.container .input-wrapper input:focus {
+    background-color: rgb(51, 55, 72);
 }
 
 .container .input-wrapper input::placeholder {
@@ -82,4 +88,8 @@ body {
     background-color: #0e92b3;
 }
 
+.container .hint {
+    text-align: center;
+    color: red;
+}
 
