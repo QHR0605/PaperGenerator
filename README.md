@@ -3,14 +3,13 @@
 # 结对编程项目
 
 ## 大致流程
-
-![](https://gitee.com/bankarian/picStorage/raw/master/20201006113153.png)
+<img src="https://gitee.com/bankarian/picStorage/raw/master/20201006113153.png" style="zoom:50%;" width="80%"/>
 
 ## 前后端数据交互
 
 > **所有数据都封装为json格式**
 
-1. ![](https://gitee.com/bankarian/picStorage/raw/master/20201006113050.png)
+1. <img src="https://gitee.com/bankarian/picStorage/raw/master/20201006113050.png" style="zoom:50%;" width="40%"/>
 
    **前端**：提交用户手机号 (服务端发送验证码，并跳转到验证页面)
 
@@ -24,7 +23,7 @@
 
    ---
 
-2. ![](https://gitee.com/bankarian/picStorage/raw/master/20201006113050.png)
+2. <img src="https://gitee.com/bankarian/picStorage/raw/master/20201006113050.png" style="zoom:50%;" width="40%"/>
 
    **前端**：提交验证码（服务端检查，成功则跳转到成功登入的页面）
 
@@ -45,7 +44,7 @@
 
    ---
 
-3. ![](https://gitee.com/bankarian/picStorage/raw/master/20201006113409.png)
+3. <img src="https://gitee.com/bankarian/picStorage/raw/master/20201006113409.png" style="zoom:50%;" width="40%"/>
 
    **前端**：判断两次密码是否相等，提交最终密码，
 
@@ -63,7 +62,7 @@
 
    ---
 
-4. ![](https://gitee.com/bankarian/picStorage/raw/master/20201006113513.png)
+4.<img src="https://gitee.com/bankarian/picStorage/raw/master/20201006113513.png" style="zoom:50%;" width="40%"/>
 
    **前端**：提交用户选择题目 
 
