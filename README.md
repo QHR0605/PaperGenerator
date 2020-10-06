@@ -10,7 +10,7 @@
 > **所有数据都封装为json格式**
 
 1. <img src="https://gitee.com/bankarian/picStorage/raw/master/20201006113050.png" style="zoom:50%;" width="40%"/>
-
+   
    **前端**：提交用户手机号 (服务端发送验证码，并跳转到验证页面)
 
    ```json
@@ -84,5 +84,10 @@
        }
    }
    ```
+## 前端访问路径
 
-   
+1."http://localhost:8080/TestPaperGenerator/index.html" 访问登录界面
+2."http://localhost:8080/TestPaperGenerator/sendsms" 点击发送手机号后的请求路径
+3."http://localhost:8080/TestPaperGenerator/handle_reg" 输入验证码后的请求路径
+4."http://localhost:8080/TestPaperGenerator/checkpassword"为输入两次密码后的请求路径
+5."http://localhost:8080/TestPaperGenerator/makequestion"为输入题目难度和数量后的请求路径
