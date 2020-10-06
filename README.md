@@ -21,7 +21,7 @@
 
    **后端**：发送验证码给用户
 
-   ---
+   
 
 2. <img src="https://gitee.com/bankarian/picStorage/raw/master/20201006113050.png" style="zoom:50%;" width="40%"/>
 
@@ -42,7 +42,7 @@
    }
    ```
 
-   ---
+   
 
 3. <img src="https://gitee.com/bankarian/picStorage/raw/master/20201006113409.png" style="zoom:50%;" width="40%"/>
 
@@ -60,7 +60,7 @@
    ？？？？
    ```
 
-   ---
+   
 
 4.<img src="https://gitee.com/bankarian/picStorage/raw/master/20201006113513.png" style="zoom:50%;" width="40%"/>
 
