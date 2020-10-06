@@ -86,12 +86,12 @@
    ```
 ## 前端访问路径
 
-1."http://localhost:8080/TestPaperGenerator/index.html" 访问登录界面
+1."http://localhost:8080/TestPaperGenerator/index.html"  访问登录界面
 
-2."http://localhost:8080/TestPaperGenerator/sendsms" 点击发送手机号后的请求路径
+2."http://localhost:8080/TestPaperGenerator/sendsms"  点击发送手机号后的请求路径
 
-3."http://localhost:8080/TestPaperGenerator/handle_reg" 输入验证码后的请求路径
+3."http://localhost:8080/TestPaperGenerator/handle_reg"  输入验证码后的请求路径
 
-4."http://localhost:8080/TestPaperGenerator/checkpassword"为输入两次密码后的请求路径
+4."http://localhost:8080/TestPaperGenerator/checkpassword" 为输入两次密码后的请求路径
 
-5."http://localhost:8080/TestPaperGenerator/makequestion"为输入题目难度和数量后的请求路径
+5."http://localhost:8080/TestPaperGenerator/makequestion" 为输入题目难度和数量后的请求路径
