@@ -15,35 +15,42 @@ import java.util.Random;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
 
+/**
+ * è¯»å–é¢˜ç›®,å¹¶è¿”å›map<é¢˜ç›®ï¼Œç­”æ¡ˆ>
+ * @author å…¨é¸¿æ¶¦
+ *
+ */
 public class FileInputUtil {
 
 	
-	//´ÓÎÄ¼şÖĞ»ñÈ¡ÌâÄ¿
-		public static Map<String,String> GetPrimaryQuestionFromDB(String type) throws IOException 
+	
+		public static Map<Integer, String> GetPrimaryQuestionFromDB(String type) throws IOException 
 		{
 			
 			
 			BufferedReader reader = null;
-			Map<String, String> result = new HashMap<String, String>();
+			Map<Integer, String> result = new HashMap<Integer, String>();
 			File file = new File(".//QuestionDB//"+type);
 			if (!file.exists())
 			{
 				file.mkdirs();
 			}
 			
-			//Ò»¿ªÊ¼Ã»ÓĞÏàÓ¦µÄÌâ¿â
+			
 			try 
 			{
 				reader = new BufferedReader(new InputStreamReader(new FileInputStream(".//QuestionDB//"+type+"//"+type+"_Questions.txt"),"UTF-8"));
 				String line = null;
+				int count = 0;
 				while ((line=reader.readLine())!=null) 
 				{
-					result.put(line, String.valueOf(new Random().nextInt(6)));
+					result.put(count++,line);
 				}
 				reader.close();
 			} catch (Exception e) 
 			{
 				return new HashMap();
+				
 			}
 			
 			return result;

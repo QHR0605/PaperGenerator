@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONObject;
 import com.ssf.util.json.*;
 
 @Controller
@@ -11,15 +12,18 @@ public class CheckPassword {
 
 	
 	@RequestMapping("checkpassword.do")
-	public String Checkpassword(String password , String passwordagain) {
+	public String Checkpassword(String passwordjson , String passwordagain) {
 		
-		//Èç¹ûÁ½´ÎÃÜÂëÒ»ÖÂÔòÌø×ªµ½³öÌâ½çÃæ
+		
+		JSONObject jsonObject = JSONObject.parseObject(passwordjson);
+		String password = jsonObject.getString("pwd");
+		//å¯†ç ä¸€è‡´,å‘é€å‡ºé¢˜è¯·æ±‚
 		if (password.equals(passwordagain)) {
 			return "redirect:makequestion.do";
 		}
 		
-		//²»Ò»ÖÂÔòË¢ĞÂµ±Ç°½çÃæ
-		return "makequestion";
+		//åˆ·æ–°æœ¬é¡µé¢
+		return "checkpassword";
 	}
 	
 }

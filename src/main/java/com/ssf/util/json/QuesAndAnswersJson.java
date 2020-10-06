@@ -3,19 +3,19 @@ package com.ssf.util.json;
 import java.util.Map;
 
 /**
- * map<"题目","答案">
- * @author 全鸿润
+ * map<"棰樼洰鎻忚堪","绛旀">
+ * @author QuesAndAnswerJson
  *
  */
-public class QuesAndAnswersJson extends JsonResult{
+public class QuesAndAnswersJson{
 	
-	private Map<String, String> m_quesAndanswers;
+	private Map<Integer, String> m_quesAndanswers;
 
-	public Map<String, String> getM_quesAndanswers() {
+	public Map<Integer, String> getM_quesAndanswers() {
 		return m_quesAndanswers;
 	}
 
-	public void setM_quesAndanswers(Map<String, String> m_quesAndanswers) {
+	public void setM_quesAndanswers(Map<Integer, String> m_quesAndanswers) {
 		this.m_quesAndanswers = m_quesAndanswers;
 	}
 	

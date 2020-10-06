@@ -10,9 +10,9 @@ import com.ssf.util.random.*;
 public class QuestionTree 
 {
 
-	private TreeNode m_root;  //根节点
-	private int m_operatornums; //操作符的个数
-	private List<TreeNode> m_res = new LinkedList<TreeNode>();//操作符结点的集合
+	private TreeNode m_root;  
+	private int m_operatornums; 
+	private List<TreeNode> m_res = new LinkedList<TreeNode>();
 
 	public QuestionTree(int operatornums)
 	{
@@ -49,7 +49,7 @@ public class QuestionTree
 	public int depth() 
 	{
 		int nums = getM_operatornums();
-		int depth = 2; //最简单的表达式1+2需要两层
+		int depth = 2; 
 		while (nums/2>0) 
 		{
 			depth++;
@@ -72,7 +72,7 @@ public class QuestionTree
 		else 
 		{
 			int index = 0;
-			int  n = depth()-3; //操作符>1的话，树的深度(层数)至少需要三层;这里得到放置操作数的层
+			int  n = depth()-3; 
 			boolean[] location = RandomUtil.GetRandomLocation(m_operatornums);
 			
 			m_root = new TreeNode(RandomUtil.GetRandomOperator(), null, null);
@@ -92,24 +92,24 @@ public class QuestionTree
 				
 			}
 			
-			//接下来放置操作数或表达式
+			
 			
 			for (int i = 0; i < location.length; i++) 
 			{
 				
-				//该位置为操作符结点,即表达式结点
+				
 				if (location[i])
 				{
 					leftnode = new TreeNode(String.valueOf(RandomUtil.GetRandombumber(100)), null, null);
 					rightnode = new TreeNode(String.valueOf(RandomUtil.GetRandombumber(100)), null, null);
-					//左子结点的位置为2*index
+					
 					if(i%2==0) 
 					{
 						leftTree = new TreeNode(RandomUtil.GetRandomOperator(), leftnode, rightnode);
 						m_res.add(leftTree);
 						m_res.get(index).setM_left(leftTree);
 					}
-					//右节点的位置
+					
 					else
 					{
 						rightTree = new TreeNode(RandomUtil.GetRandomOperator(), leftnode, rightnode);
@@ -117,7 +117,7 @@ public class QuestionTree
 						m_res.get(index).setM_right(rightTree);
 					}
 				}
-				//该位置为操作数结点,左右孩子都为空
+				
 				else
 				{
 					if (i%2==0) 

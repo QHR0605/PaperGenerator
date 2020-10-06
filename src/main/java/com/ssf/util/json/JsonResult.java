@@ -2,8 +2,8 @@ package com.ssf.util.json;
 
 public class JsonResult {
 
-	public int state; // 状态码
-	public String message; // 提示信息
+	public int state;  //鐘舵�佺爜
+	public String message;  //鎻愮ず淇℃伅
 
 	public int getState() {
 		return state;

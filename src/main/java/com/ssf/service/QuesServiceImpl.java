@@ -3,33 +3,39 @@ package com.ssf.service;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssf.dao.QuesDao;
+import com.ssf.dao.QuesDaoImpl;
 import com.ssf.util.db.FileInputUtil;
 import com.ssf.util.json.*;
 
 /**
- * Éú³ÉÌâÄ¿·şÎñ
- * ÏòcontrollerÌá¹©·şÎñ½Ó¿Ú
- * µ÷ÓÃdao²ãÌá¹©µÄÊı¾İ½»»¥½Ó¿Ú
- * @author È«ºèÈó
+ * å‘ä¸‹è°ƒç”¨daoå±‚æ¥å£,å‘ä¸Šç»™controllerå±‚æä¾›æ¥å£
+ * è¿”å›jsonå¯¹è±¡
+ * @author å…¨é¸¿æ¶¦
  *
  */
 @Service
 public class QuesServiceImpl implements QuesService {
-
 	
-	public QuesAndAnswersJson MakeQues(int level, int numbers) throws Exception {
+	
+	QuesDaoImpl quesDaoImpl = new QuesDaoImpl();
+	
+	public QuesAndAnswersJson MakeQues(String level, String number) throws Exception {
 
-		Map<String, String> map = new HashMap<String, String>();
+		Map<Integer, String> map = null;
 		QuesAndAnswersJson json = new QuesAndAnswersJson();
-		if (level==0) {
-			map = FileInputUtil.GetPrimaryQuestionFromDB("Ğ¡Ñ§");
-		}else if (level==1) {
-			map = FileInputUtil.GetPrimaryQuestionFromDB("³õÖĞ");
-		}else if (level==2) {
-			map = FileInputUtil.GetPrimaryQuestionFromDB("¸ßÖĞ");
+		int numbers = Integer.valueOf(number);
+		if (level.equals("å°å­¦")) {
+			map = quesDaoImpl.GetPaper(level, numbers);
+		}else if (level.equals("åˆä¸­")) {
+			map = quesDaoImpl.GetPaper(level, numbers);
+		}else if (level.equals("é«˜ä¸­")) {
+			map = quesDaoImpl.GetPaper(level, numbers);
 		}
 		
 		json.setM_quesAndanswers(map);
@@ -37,6 +43,24 @@ public class QuesServiceImpl implements QuesService {
 		return json;
 	}
 	
+	public static void main(String[] args) {
+		
+		QuesServiceImpl serviceImpl = new QuesServiceImpl();
+		QuesAndAnswersJson json = null;
+		
+		try {
+			json = serviceImpl.MakeQues("å°å­¦", "10");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Map<Integer,String> map = json.getM_quesAndanswers();
+		System.out.println(map.size());
+		int size = json.getM_quesAndanswers().size();
+		for (int i = 0; i < size; i++) {
+			System.out.println(map.get(i));
+		}
+	}
 	
 	
 	
