@@ -18,7 +18,7 @@ import com.google.gson.Gson;
 @Service
 public class SmsServiceImpl implements SmsService {
 
-	DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAI4G48J6nwv2ADSWppfFMy", "GzGdBCRhupz9mVr9HGFOuNMs8iAHUt");
+	DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "YourAccessKey", "YourAccessScrete");
 	IAcsClient client = new DefaultAcsClient(profile);
 	String templateCode  = null;
 	public CommonResponse sendMessage(String number,String verifycode) {
@@ -31,7 +31,7 @@ public class SmsServiceImpl implements SmsService {
         request.putQueryParameter("RegionId", "cn-hangzhou");
         request.putQueryParameter("PhoneNumbers", number);
         request.putQueryParameter("SignName", "自动生成试卷系统");
-        request.putQueryParameter("TemplateCode",  "SMS_204116418");
+        request.putQueryParameter("TemplateCode",  "Your TemplateCode");
         //0为验证码形式
         request.putQueryParameter("TemplateType", "0");
         request.putQueryParameter("TemplateName", "自动生成试卷系统");
