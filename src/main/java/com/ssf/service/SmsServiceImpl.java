@@ -50,20 +50,4 @@ public class SmsServiceImpl implements SmsService {
         
         return null;
 	}
-	
-	/**
-	 * 测试用
-	 * @param args
-	 * @throws Exception
-	 * @throws ClientException
-	 */
-	public static void main(String[] args) throws Exception, ClientException {
-		
-		SmsServiceImpl serviceImpl = new SmsServiceImpl();
-		
-		//String templateCode = serviceImpl.addTemplate();
-		CommonResponse response =  serviceImpl.sendMessage("15298917738","234552");
-		System.out.println(response.getData());
-		
-	}
 }
