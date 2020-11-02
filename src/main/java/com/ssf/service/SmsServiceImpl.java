@@ -18,7 +18,7 @@ import com.google.gson.Gson;
 @Service
 public class SmsServiceImpl implements SmsService {
 
-	DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAI4G48J6nwv2ADSWppfFMy", "GzGdBCRhupz9mVr9HGFOuNMs8iAHUt");
+	DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "YourAccessKey", "YourAccessSecrect");
 	IAcsClient client = new DefaultAcsClient(profile);
 	String templateCode  = null;
 	public CommonResponse sendMessage(String number,String verifycode) {
